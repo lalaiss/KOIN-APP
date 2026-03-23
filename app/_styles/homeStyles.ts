@@ -9,9 +9,9 @@ export const styles = StyleSheet.create({
     scrollContent: {
     padding: 24,
     paddingTop: Platform.OS === 'android' ? 50 : 20,
-    paddingBottom: 100, // Espaço para a barra de navegação inferior
+    paddingBottom: 100, 
   },
-  // --- Header ---
+  
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',

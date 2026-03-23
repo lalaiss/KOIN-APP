@@ -3,7 +3,7 @@ import { View, Text, ScrollView, TouchableOpacity, SafeAreaView } from 'react-na
 import { LinearGradient } from 'expo-linear-gradient';
 import { MaterialCommunityIcons, Feather, Ionicons } from '@expo/vector-icons';
 
-// Importando os estilos
+
 import { styles } from '../_styles/homeStyles';
 
 export default function HomeScreen() {
@@ -11,7 +11,7 @@ export default function HomeScreen() {
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
         
-        {/* --- Header --- */}
+        {}
         <View style={styles.header}>
           <View style={styles.profileSection}>
             <View style={styles.avatarPlaceholder}>
@@ -32,10 +32,10 @@ export default function HomeScreen() {
           </View>
         </View>
 
-        {/* --- Card de Saldo --- */}
+        {}
         <Text style={styles.monthText}>Março 2026</Text>
         <LinearGradient
-          colors={['#0A1128', '#001E5B']} // Gradiente azul escuro
+          colors={['#0A1128', '#001E5B']} 
           style={styles.balanceCard}
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 1 }}
@@ -62,11 +62,11 @@ export default function HomeScreen() {
           <Text style={styles.addButtonText}>Adicionar{'\n'}Transação</Text>
         </TouchableOpacity>
 
-        {/* --- Lista de Transações --- */}
+        {}
         <Text style={styles.sectionTitle}>Transações</Text>
         <View style={styles.transactionsContainer}>
           
-          {/* Item 1 */}
+          {}
           <View style={styles.transactionItem}>
             <View style={styles.transactionIconWrapper}>
               <MaterialCommunityIcons name="silverware-fork-knife" size={18} color="#FFFFFF" />
@@ -77,7 +77,7 @@ export default function HomeScreen() {
             </View>
           </View>
 
-          {/* Item 2 */}
+          {}
           <View style={styles.transactionItem}>
             <View style={styles.transactionIconWrapper}>
               <MaterialCommunityIcons name="movie-open-outline" size={18} color="#FFFFFF" />
@@ -88,7 +88,7 @@ export default function HomeScreen() {
             </View>
           </View>
 
-          {/* Item 3 */}
+          {}
           <View style={styles.transactionItem}>
             <View style={styles.transactionIconWrapper}>
               <MaterialCommunityIcons name="silverware-fork-knife" size={18} color="#FFFFFF" />

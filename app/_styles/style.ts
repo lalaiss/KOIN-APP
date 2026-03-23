@@ -19,10 +19,9 @@ export const styles = StyleSheet.create({
     paddingTop: Platform.OS === 'android' ? 40 : 0,
   },
   logoImage: {
-    width: 300,  // Diminuí o tamanho pois agora é só o ícone
+    width: 300,
     height: 300,
     resizeMode: 'contain',
-     // Dá um espaço entre a imagem e o texto
   },
  
   bottomCard: {
