@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { View, Text, TouchableOpacity, SafeAreaView, Image } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
+import { Image, SafeAreaView, Text, TouchableOpacity, View } from 'react-native';
 
 
 import { styles } from '../_styles/style';

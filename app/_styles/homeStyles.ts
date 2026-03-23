@@ -1,4 +1,4 @@
-import { StyleSheet, Platform } from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
     container: {
@@ -169,5 +169,76 @@ export const styles = StyleSheet.create({
   transactionAmount: {
     color: '#A0A0A0',
     fontSize: 12,
+  },
+
+  // --- Transação ---
+  transacaoHeader: {
+    marginBottom: 24,
+    paddingTop: 4,
+  },
+  transacaoTitle: {
+    color: '#FFFFFF',
+    fontSize: 26,
+    fontWeight: 'bold',
+    marginBottom: 4,
+  },
+  transacaoSubtitle: {
+    color: '#A0A0A0',
+    fontSize: 14,
+  },
+  categoryGrid: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+    gap: 12,
+    marginBottom: 24,
+  },
+  categoryItem: {
+    backgroundColor: 'rgba(255,255,255,0.05)',
+    borderRadius: 16,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 12,
+    borderWidth: 1,
+    borderColor: 'rgba(255,255,255,0.08)',
+  },
+  categoryItemActive: {
+    backgroundColor: '#4A6CFF',
+    borderColor: '#4A6CFF',
+  },
+  categoryItemText: {
+    marginTop: 6,
+    color: '#FFFFFF',
+    fontSize: 12,
+    textAlign: 'center',
+  },
+  categoryItemTextActive: {
+    marginTop: 6,
+    color: '#03050B',
+    fontSize: 12,
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  formContainer: {
+    backgroundColor: 'rgba(255,255,255,0.05)',
+    borderRadius: 20,
+    padding: 16,
+    borderWidth: 1,
+    borderColor: 'rgba(59, 130, 246, 0.2)',
+  },
+  formLabel: {
+    color: '#A0A0A0',
+    fontSize: 13,
+    marginBottom: 8,
+    marginTop: 10,
+  },
+  input: {
+    backgroundColor: 'rgba(255,255,255,0.08)',
+    color: '#FFFFFF',
+    borderRadius: 12,
+    paddingVertical: 10,
+    paddingHorizontal: 12,
+    borderWidth: 1,
+    borderColor: 'rgba(255,255,255,0.15)',
   },
 });

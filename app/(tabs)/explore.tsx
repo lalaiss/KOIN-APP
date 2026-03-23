@@ -1,12 +1,13 @@
-import React from 'react';
-import { View, Text, ScrollView, TouchableOpacity, SafeAreaView } from 'react-native';
+import { Feather, Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
-import { MaterialCommunityIcons, Feather, Ionicons } from '@expo/vector-icons';
-
+import { useRouter } from 'expo-router';
+import React from 'react';
+import { SafeAreaView, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 
 import { styles } from '../_styles/homeStyles';
 
 export default function HomeScreen() {
+  const router = useRouter();
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
@@ -55,7 +56,7 @@ export default function HomeScreen() {
         </LinearGradient>
 
         {/* --- Botão Adicionar Transação --- */}
-        <TouchableOpacity style={styles.addButton}>
+        <TouchableOpacity style={styles.addButton} onPress={() => router.push({ pathname: '/transacao' } as any)}>
           <View style={styles.addIconContainer}>
             <Feather name="plus" size={20} color="#03050B" />
           </View>
