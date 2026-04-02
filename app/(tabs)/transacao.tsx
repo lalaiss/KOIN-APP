@@ -1,19 +1,20 @@
 ﻿import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import {
-    KeyboardAvoidingView,
-    Platform,
-    SafeAreaView,
-    ScrollView,
-    Text,
-    TextInput,
-    TouchableOpacity,
-    useWindowDimensions,
-    View,
+  KeyboardAvoidingView,
+  Platform,
+  SafeAreaView,
+  ScrollView,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  useWindowDimensions,
+  View,
 } from 'react-native';
 
+import { useTransactions } from '../TransactionsContext';
 import { styles } from '../_styles/homeStyles';
 
 const categories = [
@@ -31,6 +32,8 @@ export default function TransacaoScreen() {
   const [valor, setValor] = useState('');
   const [descricao, setDescricao] = useState('');
   const [categoria, setCategoria] = useState('alimentacao');
+  const [tipo, setTipo] = useState<'expense' | 'income'>('expense');
+  const { addTransaction } = useTransactions();
 
   const itemSize = Math.max(90, Math.min(140, (width - 72) / 3));
 
@@ -62,7 +65,7 @@ export default function TransacaoScreen() {
                 activeOpacity={0.75}
               >
                 <MaterialCommunityIcons
-                  name={cat.icon}
+                  name={cat.icon as any}
                   size={24}
                   color={categoria === cat.key ? '#040A35' : '#FFFFFF'}
                 />
@@ -99,11 +102,46 @@ export default function TransacaoScreen() {
               onChangeText={setDescricao}
             />
 
+            <View style={styles.typeToggleRow}>
+              <TouchableOpacity
+                style={[
+                  styles.typeToggleButton,
+                  tipo === 'expense' && styles.typeToggleButtonActive,
+                ]}
+                onPress={() => setTipo('expense')}
+              >
+                <Text style={tipo === 'expense' ? styles.typeToggleTextActive : styles.typeToggleText}>Despesa</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={[
+                  styles.typeToggleButton,
+                  tipo === 'income' && styles.typeToggleButtonActive,
+                ]}
+                onPress={() => setTipo('income')}
+              >
+                <Text style={tipo === 'income' ? styles.typeToggleTextActive : styles.typeToggleText}>Receita</Text>
+              </TouchableOpacity>
+            </View>
+
             <TouchableOpacity
               style={styles.primaryButton}
               activeOpacity={0.8}
-              onPress={() => {
-                if (!valor || !descricao) return;
+              onPress={async () => {
+                const amount = Number(valor.replace(',', '.'));
+                if (!valor || !descricao || Number.isNaN(amount) || amount <= 0) return;
+
+                await addTransaction({
+                  description: descricao,
+                  category: categoria,
+                  amount: tipo === 'expense' ? -amount : amount,
+                  type: tipo,
+                });
+
+                setValor('');
+                setDescricao('');
+                setCategoria('alimentacao');
+                setTipo('expense');
+
                 router.push({ pathname: '/explore' } as any);
               }}
             >

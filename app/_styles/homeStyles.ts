@@ -241,4 +241,60 @@ export const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: 'rgba(255,255,255,0.15)',
   },
+  primaryButton: {
+    borderRadius: 12,
+    overflow: 'hidden',
+    marginTop: 16,
+  },
+  buttonGradient: {
+    paddingVertical: 14,
+    alignItems: 'center',
+    borderRadius: 12,
+  },
+  primaryButtonText: {
+    color: '#FFFFFF',
+    fontWeight: 'bold',
+    fontSize: 16,
+  },
+  secondaryButton: {
+    marginTop: 10,
+    alignItems: 'center',
+    paddingVertical: 12,
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: 'rgba(255,255,255,0.2)',
+  },
+  secondaryButtonText: {
+    color: '#FFFFFF',
+    fontWeight: 'bold',
+    fontSize: 14,
+  },
+  typeToggleRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 12,
+    marginBottom: 12,
+  },
+  typeToggleButton: {
+    flex: 1,
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: 'rgba(255,255,255,0.25)',
+    paddingVertical: 10,
+    borderRadius: 12,
+    marginHorizontal: 4,
+    backgroundColor: 'rgba(255,255,255,0.05)',
+  },
+  typeToggleButtonActive: {
+    backgroundColor: '#4A6CFF',
+    borderColor: '#4A6CFF',
+  },
+  typeToggleText: {
+    color: '#A0A0A0',
+    fontWeight: 'bold',
+  },
+  typeToggleTextActive: {
+    color: '#03050B',
+    fontWeight: 'bold',
+  },
 });
