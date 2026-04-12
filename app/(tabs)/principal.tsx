@@ -97,7 +97,6 @@ export default function HomeScreen() {
         </LinearGradient>
 
         <View style={styles.buttonsHorizontalContainer}>
-          {/* Despesas */}
           <TouchableOpacity style={styles.addButton} onPress={() => router.push({ pathname: '/(tabs)/despesas' } as any)}>
             <View style={styles.addIconContainer}>
               <Feather name="arrow-down" size={20} color="#03050B" />
@@ -105,7 +104,6 @@ export default function HomeScreen() {
             <Text style={styles.addButtonText}>Despesas</Text>
           </TouchableOpacity>
 
-          {/* Receitas */}
           <TouchableOpacity style={styles.recebitasButton} onPress={() => router.push({ pathname: '/(tabs)/receitas' } as any)}>
             <View style={styles.receitasIconContainer}>
               <Feather name="arrow-up" size={20} color="#FFFFFF" />
@@ -113,7 +111,6 @@ export default function HomeScreen() {
             <Text style={styles.receitasButtonText}>Receitas</Text>
           </TouchableOpacity>
 
-          {/* Investimentos */}
           <TouchableOpacity style={styles.investimentosButton} onPress={() => router.push({ pathname: '/(tabs)/investimentos' } as any)}>
             <View style={styles.investimentosIconContainer}>
               <MaterialCommunityIcons name="trending-up" size={15} color="#FFFFFF" />

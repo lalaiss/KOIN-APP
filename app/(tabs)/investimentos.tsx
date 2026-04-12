@@ -1,4 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
 import React, { useState } from 'react';
@@ -22,14 +23,34 @@ const styles = StyleSheet.create({
   },
   scrollContent: {
     flexGrow: 1,
-    padding: 24,
+    padding: 0,
   },
-  header: {
-    marginBottom: 32,
+  headerBar: {
+    backgroundColor: '#0F1729',
+    paddingHorizontal: 16,
+    paddingVertical: 16,
+    flexDirection: 'row',
     alignItems: 'center',
+    borderBottomWidth: 1,
+    borderBottomColor: '#1E293B',
+  },
+  backButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    flex: 1,
+  },
+  headerTitle: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: '#FFFFFF',
+    marginLeft: 12,
+  },
+  contentContainer: {
+    padding: 24,
+    paddingBottom: 50,
   },
   title: {
-    fontSize: 28,
+    fontSize: 24,
     fontWeight: 'bold',
     color: '#FFFFFF',
     marginBottom: 8,
@@ -37,6 +58,7 @@ const styles = StyleSheet.create({
   subtitle: {
     fontSize: 14,
     color: '#9CA3AF',
+    marginBottom: 24,
   },
   formContainer: {
     marginBottom: 24,
@@ -67,6 +89,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     overflow: 'hidden',
     marginBottom: 12,
+    marginTop: 12,
   },
   buttonGradient: {
     paddingVertical: 14,
@@ -97,6 +120,7 @@ export default function InvestimentosScreen() {
   const [valor, setValor] = useState('');
   const [descricao, setDescricao] = useState('');
   const [tipo, setTipo] = useState('');
+  const [data, setData] = useState(new Date().toLocaleDateString('pt-BR'));
   const [loading, setLoading] = useState(false);
   const [focusedField, setFocusedField] = useState<string | null>(null);
 
@@ -133,7 +157,7 @@ export default function InvestimentosScreen() {
         valor: valorNumerico,
         tipoInvestimento: tipo.trim() || 'Investimento',
         icon: 'trending-up',
-        data: new Date().toLocaleDateString('pt-BR'),
+        data: data,
       };
 
       const transacoesArmazenadas = await AsyncStorage.getItem('transacoes_usuario');
@@ -154,6 +178,17 @@ export default function InvestimentosScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
+      <View style={styles.headerBar}>
+        <TouchableOpacity
+          style={styles.backButton}
+          onPress={() => router.push({ pathname: '/(tabs)/principal' } as any)}
+          activeOpacity={0.7}
+        >
+          <MaterialCommunityIcons name="chevron-left" size={24} color="#FFFFFF" />
+          <Text style={styles.headerTitle}>Transações</Text>
+        </TouchableOpacity>
+      </View>
+
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         style={{ flex: 1 }}
@@ -162,88 +197,105 @@ export default function InvestimentosScreen() {
           contentContainerStyle={styles.scrollContent}
           showsVerticalScrollIndicator={false}
         >
-          <View style={styles.header}>
+          <View style={styles.contentContainer}>
             <Text style={styles.title}>Registrar Investimento</Text>
             <Text style={styles.subtitle}>Registre seus aportes de investimento</Text>
-          </View>
 
-          <View style={styles.formContainer}>
-            <View style={styles.inputGroup}>
-              <Text style={styles.label}>Valor do Aporte (R$)</Text>
-              <TextInput
-                style={[
-                  styles.input,
-                  focusedField === 'valor' && styles.inputFocused,
-                ]}
-                value={valor}
-                placeholder="0,00"
-                keyboardType="numeric"
-                placeholderTextColor="#6B7280"
-                onChangeText={setValor}
-                onFocus={() => setFocusedField('valor')}
-                onBlur={() => setFocusedField(null)}
-                editable={!loading}
-              />
-            </View>
+            <View style={styles.formContainer}>
+              <View style={styles.inputGroup}>
+                <Text style={styles.label}>Valor do Aporte (R$)</Text>
+                <TextInput
+                  style={[
+                    styles.input,
+                    focusedField === 'valor' && styles.inputFocused,
+                  ]}
+                  value={valor}
+                  placeholder="0,00"
+                  keyboardType="decimal-pad"
+                  placeholderTextColor="#6B7280"
+                  onChangeText={setValor}
+                  onFocus={() => setFocusedField('valor')}
+                  onBlur={() => setFocusedField(null)}
+                  editable={!loading}
+                />
+              </View>
 
-            <View style={styles.inputGroup}>
-              <Text style={styles.label}>Descrição</Text>
-              <TextInput
-                style={[
-                  styles.input,
-                  focusedField === 'descricao' && styles.inputFocused,
-                ]}
-                value={descricao}
-                placeholder="Ex: Aporte mensal"
-                placeholderTextColor="#6B7280"
-                onChangeText={setDescricao}
-                onFocus={() => setFocusedField('descricao')}
-                onBlur={() => setFocusedField(null)}
-                editable={!loading}
-              />
-            </View>
+              <View style={styles.inputGroup}>
+                <Text style={styles.label}>Descrição</Text>
+                <TextInput
+                  style={[
+                    styles.input,
+                    focusedField === 'descricao' && styles.inputFocused,
+                  ]}
+                  value={descricao}
+                  placeholder="Ex: Aporte mensal"
+                  placeholderTextColor="#6B7280"
+                  onChangeText={setDescricao}
+                  onFocus={() => setFocusedField('descricao')}
+                  onBlur={() => setFocusedField(null)}
+                  editable={!loading}
+                />
+              </View>
 
-            <View style={styles.inputGroup}>
-              <Text style={styles.label}>Tipo de Investimento (opcional)</Text>
-              <TextInput
-                style={[
-                  styles.input,
-                  focusedField === 'tipo' && styles.inputFocused,
-                ]}
-                value={tipo}
-                placeholder="Ex: Ações, Fundos, Criptomoedas"
-                placeholderTextColor="#6B7280"
-                onChangeText={setTipo}
-                onFocus={() => setFocusedField('tipo')}
-                onBlur={() => setFocusedField(null)}
-                editable={!loading}
-              />
-            </View>
+              <View style={styles.inputGroup}>
+                <Text style={styles.label}>Tipo de Investimento (opcional)</Text>
+                <TextInput
+                  style={[
+                    styles.input,
+                    focusedField === 'tipo' && styles.inputFocused,
+                  ]}
+                  value={tipo}
+                  placeholder="Ex: Ações, Fundos, Criptomoedas"
+                  placeholderTextColor="#6B7280"
+                  onChangeText={setTipo}
+                  onFocus={() => setFocusedField('tipo')}
+                  onBlur={() => setFocusedField(null)}
+                  editable={!loading}
+                />
+              </View>
 
-            <TouchableOpacity
-              style={styles.button}
-              onPress={handleCadastrarInvestimento}
-              disabled={loading}
-              activeOpacity={0.8}
-            >
-              <LinearGradient
-                colors={['#2563EB', '#1D4ED8']}
-                style={styles.buttonGradient}
+              <View style={styles.inputGroup}>
+                <Text style={styles.label}>Data do investimento</Text>
+                <TextInput
+                  style={[
+                    styles.input,
+                    focusedField === 'data' && styles.inputFocused,
+                  ]}
+                  value={data}
+                  placeholder="DD/MM/YYYY"
+                  placeholderTextColor="#6B7280"
+                  onChangeText={setData}
+                  onFocus={() => setFocusedField('data')}
+                  onBlur={() => setFocusedField(null)}
+                  editable={!loading}
+                />
+              </View>
+
+              <TouchableOpacity
+                style={styles.button}
+                onPress={handleCadastrarInvestimento}
+                disabled={loading}
+                activeOpacity={0.8}
               >
-                <Text style={styles.buttonText}>
-                  {loading ? 'Registrando...' : 'Registrar Investimento'}
-                </Text>
-              </LinearGradient>
-            </TouchableOpacity>
+                <LinearGradient
+                  colors={['#2563EB', '#1D4ED8']}
+                  style={styles.buttonGradient}
+                >
+                  <Text style={styles.buttonText}>
+                    {loading ? 'Registrando...' : 'Registrar Investimento'}
+                  </Text>
+                </LinearGradient>
+              </TouchableOpacity>
 
-            <TouchableOpacity
-              style={styles.cancelButton}
-              onPress={() => router.push({ pathname: '/(tabs)/principal' } as any)}
-              disabled={loading}
-              activeOpacity={0.8}
-            >
-              <Text style={styles.cancelButtonText}>Voltar</Text>
-            </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.cancelButton}
+                onPress={() => router.push({ pathname: '/(tabs)/principal' } as any)}
+                disabled={loading}
+                activeOpacity={0.8}
+              >
+                <Text style={styles.cancelButtonText}>Voltar</Text>
+              </TouchableOpacity>
+            </View>
           </View>
         </ScrollView>
       </KeyboardAvoidingView>
