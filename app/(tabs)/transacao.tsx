@@ -3,15 +3,15 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
 import React, { useState } from 'react';
 import {
-    KeyboardAvoidingView,
-    Platform,
-    SafeAreaView,
-    ScrollView,
-    Text,
-    TextInput,
-    TouchableOpacity,
-    useWindowDimensions,
-    View,
+  KeyboardAvoidingView,
+  Platform,
+  SafeAreaView,
+  ScrollView,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  useWindowDimensions,
+  View,
 } from 'react-native';
 
 import { styles } from '../_styles/homeStyles';
@@ -104,7 +104,7 @@ export default function TransacaoScreen() {
               activeOpacity={0.8}
               onPress={() => {
                 if (!valor || !descricao) return;
-                router.push({ pathname: '/explore' } as any);
+                router.push({ pathname: '/principal' } as any);
               }}
             >
               <LinearGradient
@@ -118,7 +118,7 @@ export default function TransacaoScreen() {
             <TouchableOpacity
               style={styles.secondaryButton}
               activeOpacity={0.6}
-              onPress={() => router.push({ pathname: '/explore' } as any)}
+              onPress={() => router.push({ pathname: '/principal' } as any)}
             >
               <Text style={styles.secondaryButtonText}>Cancelar</Text>
             </TouchableOpacity>

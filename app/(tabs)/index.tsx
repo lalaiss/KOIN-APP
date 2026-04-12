@@ -52,7 +52,7 @@ export default function WelcomeScreen() {
           <TouchableOpacity 
             style={styles.secondaryButton} 
             activeOpacity={0.6}
-            onPress={() => router.push('/explore')} 
+            onPress={() => router.push('/principal')} 
           >
             <Text style={styles.secondaryButtonText}>Já tenho uma conta</Text>
           </TouchableOpacity>
