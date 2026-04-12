@@ -34,7 +34,6 @@ export default function TabLayout() {
         name="transacao"
         options={{
           title: 'Transação',
-          href: null,
           tabBarButton: () => null,
         }}
       />
@@ -42,7 +41,6 @@ export default function TabLayout() {
         name="despesas"
         options={{
           title: 'Despesas',
-          href: null,
           tabBarButton: () => null,
         }}
       />
@@ -50,7 +48,6 @@ export default function TabLayout() {
         name="receitas"
         options={{
           title: 'Receitas',
-          href: null,
           tabBarButton: () => null,
         }}
       />
@@ -58,7 +55,6 @@ export default function TabLayout() {
         name="investimentos"
         options={{
           title: 'Investimentos',
-          href: null,
           tabBarButton: () => null,
         }}
       />

@@ -97,11 +97,27 @@ export default function HomeScreen() {
         </LinearGradient>
 
         {/* --- Botão Adicionar Transação --- */}
-        <TouchableOpacity style={styles.addButton} onPress={() => router.push({ pathname: '/(tabs)/transacao' } as any)}>
+        <TouchableOpacity style={styles.addButton} onPress={() => router.push({ pathname: '/(tabs)/despesas' } as any)}>
           <View style={styles.addIconContainer}>
-            <Feather name="plus" size={20} color="#03050B" />
+            <Feather name="arrow-down" size={20} color="#03050B" />
           </View>
-          <Text style={styles.addButtonText}>Adicionar{'\n'}Transação</Text>
+          <Text style={styles.addButtonText}>Despesas</Text>
+        </TouchableOpacity>
+
+        {/* --- Botão Receitas --- */}
+        <TouchableOpacity style={styles.recebitasButton} onPress={() => router.push({ pathname: '/(tabs)/receitas' } as any)}>
+          <View style={styles.receitasIconContainer}>
+            <Feather name="arrow-up" size={20} color="#FFFFFF" />
+          </View>
+          <Text style={styles.receitasButtonText}>Receitas</Text>
+        </TouchableOpacity>
+
+        {/* --- Botão Investimentos --- */}
+        <TouchableOpacity style={styles.investimentosButton} onPress={() => router.push({ pathname: '/(tabs)/investimentos' } as any)}>
+          <View style={styles.investimentosIconContainer}>
+            <MaterialCommunityIcons name="trending-up" size={20} color="#FFFFFF" />
+          </View>
+          <Text style={styles.investimentosButtonText}>Investimentos</Text>
         </TouchableOpacity>
 
         {}
