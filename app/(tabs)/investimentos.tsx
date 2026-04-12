@@ -238,7 +238,7 @@ export default function InvestimentosScreen() {
 
             <TouchableOpacity
               style={styles.cancelButton}
-              onPress={() => router.push({ pathname: '/(tabs)/transacao' } as any)}
+              onPress={() => router.push({ pathname: '/(tabs)/principal' } as any)}
               disabled={loading}
               activeOpacity={0.8}
             >

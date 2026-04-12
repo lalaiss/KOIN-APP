@@ -96,7 +96,6 @@ export default function HomeScreen() {
           </TouchableOpacity>
         </LinearGradient>
 
-        {/* --- Botões de Transações (Horizontais) --- */}
         <View style={styles.buttonsHorizontalContainer}>
           {/* Despesas */}
           <TouchableOpacity style={styles.addButton} onPress={() => router.push({ pathname: '/(tabs)/despesas' } as any)}>
@@ -117,7 +116,7 @@ export default function HomeScreen() {
           {/* Investimentos */}
           <TouchableOpacity style={styles.investimentosButton} onPress={() => router.push({ pathname: '/(tabs)/investimentos' } as any)}>
             <View style={styles.investimentosIconContainer}>
-              <MaterialCommunityIcons name="trending-up" size={20} color="#FFFFFF" />
+              <MaterialCommunityIcons name="trending-up" size={15} color="#FFFFFF" />
             </View>
             <Text style={styles.investimentosButtonText}>Investimentos</Text>
           </TouchableOpacity>
