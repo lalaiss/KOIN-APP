@@ -96,29 +96,32 @@ export default function HomeScreen() {
           </TouchableOpacity>
         </LinearGradient>
 
-        {/* --- Botão Adicionar Transação --- */}
-        <TouchableOpacity style={styles.addButton} onPress={() => router.push({ pathname: '/(tabs)/despesas' } as any)}>
-          <View style={styles.addIconContainer}>
-            <Feather name="arrow-down" size={20} color="#03050B" />
-          </View>
-          <Text style={styles.addButtonText}>Despesas</Text>
-        </TouchableOpacity>
+        {/* --- Botões de Transações (Horizontais) --- */}
+        <View style={styles.buttonsHorizontalContainer}>
+          {/* Despesas */}
+          <TouchableOpacity style={styles.addButton} onPress={() => router.push({ pathname: '/(tabs)/despesas' } as any)}>
+            <View style={styles.addIconContainer}>
+              <Feather name="arrow-down" size={20} color="#03050B" />
+            </View>
+            <Text style={styles.addButtonText}>Despesas</Text>
+          </TouchableOpacity>
 
-        {/* --- Botão Receitas --- */}
-        <TouchableOpacity style={styles.recebitasButton} onPress={() => router.push({ pathname: '/(tabs)/receitas' } as any)}>
-          <View style={styles.receitasIconContainer}>
-            <Feather name="arrow-up" size={20} color="#FFFFFF" />
-          </View>
-          <Text style={styles.receitasButtonText}>Receitas</Text>
-        </TouchableOpacity>
+          {/* Receitas */}
+          <TouchableOpacity style={styles.recebitasButton} onPress={() => router.push({ pathname: '/(tabs)/receitas' } as any)}>
+            <View style={styles.receitasIconContainer}>
+              <Feather name="arrow-up" size={20} color="#FFFFFF" />
+            </View>
+            <Text style={styles.receitasButtonText}>Receitas</Text>
+          </TouchableOpacity>
 
-        {/* --- Botão Investimentos --- */}
-        <TouchableOpacity style={styles.investimentosButton} onPress={() => router.push({ pathname: '/(tabs)/investimentos' } as any)}>
-          <View style={styles.investimentosIconContainer}>
-            <MaterialCommunityIcons name="trending-up" size={20} color="#FFFFFF" />
-          </View>
-          <Text style={styles.investimentosButtonText}>Investimentos</Text>
-        </TouchableOpacity>
+          {/* Investimentos */}
+          <TouchableOpacity style={styles.investimentosButton} onPress={() => router.push({ pathname: '/(tabs)/investimentos' } as any)}>
+            <View style={styles.investimentosIconContainer}>
+              <MaterialCommunityIcons name="trending-up" size={20} color="#FFFFFF" />
+            </View>
+            <Text style={styles.investimentosButtonText}>Investimentos</Text>
+          </TouchableOpacity>
+        </View>
 
         {}
         <Text style={styles.sectionTitle}>Transações</Text>
