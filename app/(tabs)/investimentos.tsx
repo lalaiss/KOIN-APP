@@ -1,5 +1,6 @@
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import DateTimePicker from '@react-native-community/datetimepicker';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
 import React, { useState } from 'react';
@@ -120,9 +121,23 @@ export default function InvestimentosScreen() {
   const [valor, setValor] = useState('');
   const [descricao, setDescricao] = useState('');
   const [tipo, setTipo] = useState('');
-  const [data, setData] = useState(new Date().toLocaleDateString('pt-BR'));
+  const [data, setData] = useState(new Date());
+  const [showDatePicker, setShowDatePicker] = useState(false);
   const [loading, setLoading] = useState(false);
   const [focusedField, setFocusedField] = useState<string | null>(null);
+
+  const handleDateChange = (event: any, selectedDate?: Date) => {
+    if (Platform.OS === 'android') {
+      setShowDatePicker(false);
+    }
+    if (selectedDate) {
+      setData(selectedDate);
+    }
+  };
+
+  const formatarData = (date: Date) => {
+    return date.toLocaleDateString('pt-BR');
+  };
 
   const handleCadastrarInvestimento = async () => {
     if (!valor.trim()) {
@@ -157,7 +172,7 @@ export default function InvestimentosScreen() {
         valor: valorNumerico,
         tipoInvestimento: tipo.trim() || 'Investimento',
         icon: 'trending-up',
-        data: data,
+        data: formatarData(data),
       };
 
       const transacoesArmazenadas = await AsyncStorage.getItem('transacoes_usuario');
@@ -256,19 +271,26 @@ export default function InvestimentosScreen() {
 
               <View style={styles.inputGroup}>
                 <Text style={styles.label}>Data do investimento</Text>
-                <TextInput
-                  style={[
-                    styles.input,
-                    focusedField === 'data' && styles.inputFocused,
-                  ]}
-                  value={data}
-                  placeholder="DD/MM/YYYY"
-                  placeholderTextColor="#6B7280"
-                  onChangeText={setData}
-                  onFocus={() => setFocusedField('data')}
-                  onBlur={() => setFocusedField(null)}
-                  editable={!loading}
-                />
+                <TouchableOpacity
+                  style={[styles.input, { justifyContent: 'center' }]}
+                  onPress={() => setShowDatePicker(true)}
+                  activeOpacity={0.7}
+                >
+                  <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+                    <Text style={{ color: '#FFFFFF', fontSize: 16 }}>
+                      {formatarData(data)}
+                    </Text>
+                    <MaterialCommunityIcons name="calendar" size={20} color="#FFFFFF" />
+                  </View>
+                </TouchableOpacity>
+                {showDatePicker && (
+                  <DateTimePicker
+                    value={data}
+                    mode="date"
+                    display={Platform.OS === 'ios' ? 'spinner' : 'default'}
+                    onChange={handleDateChange}
+                  />
+                )}
               </View>
 
               <TouchableOpacity
