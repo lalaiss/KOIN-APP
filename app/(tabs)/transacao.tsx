@@ -1,130 +1,164 @@
-﻿import { MaterialCommunityIcons } from '@expo/vector-icons';
+﻿import { Feather, MaterialCommunityIcons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
-import React, { useState } from 'react';
+import React from 'react';
 import {
-  KeyboardAvoidingView,
-  Platform,
   SafeAreaView,
   ScrollView,
+  StyleSheet,
   Text,
-  TextInput,
   TouchableOpacity,
-  useWindowDimensions,
   View,
 } from 'react-native';
 
-import { styles } from '../_styles/homeStyles';
-
-const categories = [
-  { key: 'alimentacao', label: 'Alimentação', icon: 'silverware-fork-knife' },
-  { key: 'transporte', label: 'Transporte', icon: 'car' },
-  { key: 'saude', label: 'Saúde', icon: 'pill' },
-  { key: 'lazer', label: 'Lazer', icon: 'movie-open-outline' },
-  { key: 'conta', label: 'Contas', icon: 'flash' },
-  { key: 'outros', label: 'Outros', icon: 'dots-horizontal' },
-];
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#03050B',
+  },
+  scrollContent: {
+    flexGrow: 1,
+    justifyContent: 'center',
+    padding: 24,
+  },
+  header: {
+    marginBottom: 48,
+    alignItems: 'center',
+  },
+  title: {
+    fontSize: 32,
+    fontWeight: 'bold',
+    color: '#FFFFFF',
+    marginBottom: 8,
+  },
+  subtitle: {
+    fontSize: 14,
+    color: '#9CA3AF',
+  },
+  optionsContainer: {
+    gap: 16,
+  },
+  optionButton: {
+    borderRadius: 16,
+    overflow: 'hidden',
+    minHeight: 130,
+  },
+  optionGradient: {
+    padding: 24,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  iconContainer: {
+    width: 56,
+    height: 56,
+    borderRadius: 28,
+    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 12,
+  },
+  optionTitle: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: '#FFFFFF',
+    marginBottom: 4,
+  },
+  optionDescription: {
+    fontSize: 12,
+    color: 'rgba(255, 255, 255, 0.7)',
+  },
+});
 
 export default function TransacaoScreen() {
   const router = useRouter();
-  const { width } = useWindowDimensions();
-  const [valor, setValor] = useState('');
-  const [descricao, setDescricao] = useState('');
-  const [categoria, setCategoria] = useState('alimentacao');
 
-  const itemSize = Math.max(90, Math.min(140, (width - 72) / 3));
+  const handleNavigate = (rota: string) => {
+    router.push(rota as any);
+  };
 
   return (
     <SafeAreaView style={styles.container}>
-      <KeyboardAvoidingView
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        style={{ flex: 1 }}
+      <ScrollView
+        contentContainerStyle={styles.scrollContent}
+        showsVerticalScrollIndicator={false}
       >
-        <ScrollView
-          contentContainerStyle={[styles.scrollContent, { paddingBottom: 50 }]}
-          showsVerticalScrollIndicator={false}
-        >
-          <View style={styles.transacaoHeader}>
-            <Text style={styles.transacaoTitle}>Cadastrar Gastos</Text>
-            <Text style={styles.transacaoSubtitle}>Selecione categoria e informe valor</Text>
-          </View>
+        <View style={styles.header}>
+          <Text style={styles.title}>Movimentações</Text>
+          <Text style={styles.subtitle}>Selecione o tipo de transação</Text>
+        </View>
 
-          <View style={styles.categoryGrid}>
-            {categories.map((cat) => (
-              <TouchableOpacity
-                key={cat.key}
-                style={[
-                  styles.categoryItem,
-                  { width: itemSize, height: itemSize },
-                  categoria === cat.key && styles.categoryItemActive,
-                ]}
-                onPress={() => setCategoria(cat.key)}
-                activeOpacity={0.75}
-              >
+        <View style={styles.optionsContainer}>
+          {/* Despesas */}
+          <TouchableOpacity
+            style={styles.optionButton}
+            onPress={() => handleNavigate('/(tabs)/despesas')}
+            activeOpacity={0.8}
+          >
+            <LinearGradient
+              colors={['#DC2626', '#991B1B']}
+              start={{ x: 0, y: 0 }}
+              end={{ x: 1, y: 1 }}
+              style={styles.optionGradient}
+            >
+              <View style={styles.iconContainer}>
+                <Feather name="arrow-down" size={28} color="#FFFFFF" />
+              </View>
+              <Text style={styles.optionTitle}>Despesas</Text>
+              <Text style={styles.optionDescription}>
+                Registre seus gastos
+              </Text>
+            </LinearGradient>
+          </TouchableOpacity>
+
+          {/* Receitas */}
+          <TouchableOpacity
+            style={styles.optionButton}
+            onPress={() => handleNavigate('/(tabs)/receitas')}
+            activeOpacity={0.8}
+          >
+            <LinearGradient
+              colors={['#16A34A', '#15803D']}
+              start={{ x: 0, y: 0 }}
+              end={{ x: 1, y: 1 }}
+              style={styles.optionGradient}
+            >
+              <View style={styles.iconContainer}>
+                <Feather name="arrow-up" size={28} color="#FFFFFF" />
+              </View>
+              <Text style={styles.optionTitle}>Receitas</Text>
+              <Text style={styles.optionDescription}>
+                Registre seus ganhos
+              </Text>
+            </LinearGradient>
+          </TouchableOpacity>
+
+          {/* Investimentos */}
+          <TouchableOpacity
+            style={styles.optionButton}
+            onPress={() => handleNavigate('/(tabs)/investimentos')}
+            activeOpacity={0.8}
+          >
+            <LinearGradient
+              colors={['#2563EB', '#1D4ED8']}
+              start={{ x: 0, y: 0 }}
+              end={{ x: 1, y: 1 }}
+              style={styles.optionGradient}
+            >
+              <View style={styles.iconContainer}>
                 <MaterialCommunityIcons
-                  name={cat.icon}
-                  size={24}
-                  color={categoria === cat.key ? '#040A35' : '#FFFFFF'}
+                  name="trending-up"
+                  size={28}
+                  color="#FFFFFF"
                 />
-                <Text
-                  style={
-                    categoria === cat.key
-                      ? styles.categoryItemTextActive
-                      : styles.categoryItemText
-                  }
-                >
-                  {cat.label}
-                </Text>
-              </TouchableOpacity>
-            ))}
-          </View>
-
-          <View style={styles.formContainer}>
-            <Text style={styles.formLabel}>Valor (R$)</Text>
-            <TextInput
-              style={styles.input}
-              value={valor}
-              placeholder="0,00"
-              keyboardType="numeric"
-              placeholderTextColor="#A0A0A0"
-              onChangeText={setValor}
-            />
-
-            <Text style={styles.formLabel}>Descrição</Text>
-            <TextInput
-              style={styles.input}
-              value={descricao}
-              placeholder="Ex: Almoço"
-              placeholderTextColor="#A0A0A0"
-              onChangeText={setDescricao}
-            />
-
-            <TouchableOpacity
-              style={styles.primaryButton}
-              activeOpacity={0.8}
-              onPress={() => {
-                if (!valor || !descricao) return;
-                router.push({ pathname: '/principal' } as any);
-              }}
-            >
-              <LinearGradient
-                colors={['#181E52', '#1932B3']}
-                style={styles.buttonGradient}
-              >
-                <Text style={styles.primaryButtonText}>Cadastrar Transação</Text>
-              </LinearGradient>
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              style={styles.secondaryButton}
-              activeOpacity={0.6}
-              onPress={() => router.push({ pathname: '/principal' } as any)}
-            >
-              <Text style={styles.secondaryButtonText}>Cancelar</Text>
-            </TouchableOpacity>
-          </View>
-        </ScrollView>
-      </KeyboardAvoidingView>
+              </View>
+              <Text style={styles.optionTitle}>Investimentos</Text>
+              <Text style={styles.optionDescription}>
+                Registre seus aportes
+              </Text>
+            </LinearGradient>
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
     </SafeAreaView>
   );
 }

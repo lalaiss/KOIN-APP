@@ -97,7 +97,7 @@ export default function HomeScreen() {
         </LinearGradient>
 
         {/* --- Botão Adicionar Transação --- */}
-        <TouchableOpacity style={styles.addButton} onPress={() => router.push({ pathname: '/transacao' } as any)}>
+        <TouchableOpacity style={styles.addButton} onPress={() => router.push({ pathname: '/(tabs)/transacao' } as any)}>
           <View style={styles.addIconContainer}>
             <Feather name="plus" size={20} color="#03050B" />
           </View>
