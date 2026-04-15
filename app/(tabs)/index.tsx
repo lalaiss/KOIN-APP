@@ -40,7 +40,11 @@ export default function WelcomeScreen() {
             Cadastre-se, crie, controle{'\n'}todos os seus gastos e muito{'\n'}mais
           </Text>
 
-          <TouchableOpacity style={styles.primaryButton} activeOpacity={0.8}>
+          <TouchableOpacity
+            style={styles.primaryButton}
+            activeOpacity={0.8}
+            onPress={() => router.push('/cadastro')}
+          >
             <LinearGradient
               colors={['#10152B', '#080C1E']}
               style={styles.buttonGradient}
@@ -52,7 +56,7 @@ export default function WelcomeScreen() {
           <TouchableOpacity 
             style={styles.secondaryButton} 
             activeOpacity={0.6}
-            onPress={() => router.push('/principal')} 
+            onPress={() => router.push('/entrar')}
           >
             <Text style={styles.secondaryButtonText}>Já tenho uma conta</Text>
           </TouchableOpacity>

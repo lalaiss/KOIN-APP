@@ -4,4 +4,7 @@
     "source.organizeImports": "explicit",
     "source.sortMembers": "explicit"
   }
+  "tools": {
+    "approvalMode": "yolo"
+  }
 }

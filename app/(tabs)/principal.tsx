@@ -96,16 +96,22 @@ export default function HomeScreen() {
             </TouchableOpacity>
           </View>
           
-          <TouchableOpacity style={styles.viewTransactionsBtn}>
-            <MaterialCommunityIcons name="file-document-outline" size={18} color="#A0A0A0" />
-            <Text style={styles.viewTransactionsText}>Ver transações</Text>
+          <TouchableOpacity
+            style={styles.viewTransactionsBtn}
+            onPress={() => router.push({ pathname: '/(tabs)/relatorio' } as any)}
+          >
+            <MaterialCommunityIcons
+              name="file-document-outline"
+              size={18}
+              color="#A0A0A0" />
+            <Text style={styles.viewTransactionsText}>Ver extrato</Text>
           </TouchableOpacity>
         </LinearGradient>
 
         <View style={styles.buttonsHorizontalContainer}>
           <TouchableOpacity style={styles.addButton} onPress={() => router.push({ pathname: '/(tabs)/despesas' } as any)}>
             <View style={styles.addIconContainer}>
-              <Feather name="arrow-down" size={20} color="#03050B" />
+              <Feather name="arrow-down" size={20} color="#ffffff" />
             </View>
             <Text style={styles.addButtonText}>Despesas</Text>
           </TouchableOpacity>

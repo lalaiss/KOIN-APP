@@ -7,6 +7,7 @@ import React, { useState } from 'react';
 import {
   Alert,
   KeyboardAvoidingView,
+  Modal,
   Platform,
   SafeAreaView,
   ScrollView,
@@ -175,6 +176,14 @@ export default function DespesasScreen() {
     if (selectedDate) {
       setData(selectedDate);
     }
+  };
+
+  const handleConfirmDate = () => {
+    setShowDatePicker(false);
+  };
+
+  const handleCancelDate = () => {
+    setShowDatePicker(false);
   };
 
   const formatarData = (date: Date) => {
@@ -347,14 +356,54 @@ export default function DespesasScreen() {
                     <MaterialCommunityIcons name="calendar" size={20} color="#FFFFFF" />
                   </View>
                 </TouchableOpacity>
-                {showDatePicker && (
+                {Platform.OS === 'ios' && showDatePicker ? (
+                  <Modal
+                    transparent
+                    animationType="slide"
+                    visible={showDatePicker}
+                    onRequestClose={handleCancelDate}
+                  >
+                    <View style={{ flex: 1, justifyContent: 'flex-end', backgroundColor: 'rgba(0,0,0,0.5)' }}>
+                      <View style={{ backgroundColor: '#0F1729', borderTopLeftRadius: 20, borderTopRightRadius: 20, paddingTop: 20 }}>
+                        <DateTimePicker
+                          value={data}
+                          mode="date"
+                          display="spinner"
+                          onChange={handleDateChange}
+                          textColor="#FFFFFF"
+                        />
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-around', paddingVertical: 20, borderTopWidth: 1, borderTopColor: '#1E293B' }}>
+                          <TouchableOpacity
+                            style={styles.cancelButton}
+                            onPress={handleCancelDate}
+                          >
+                            <Text style={styles.cancelButtonText}>Cancelar</Text>
+                          </TouchableOpacity>
+                          <TouchableOpacity
+                            style={[styles.button, { flex: 1, marginHorizontal: 8, marginVertical: 0 }]}
+                            onPress={handleConfirmDate}
+                          >
+                            <LinearGradient
+                              colors={['#DC2626', '#991B1B']}
+                              start={{ x: 0, y: 0 }}
+                              end={{ x: 1, y: 1 }}
+                              style={styles.buttonGradient}
+                            >
+                              <Text style={styles.buttonText}>Confirmar</Text>
+                            </LinearGradient>
+                          </TouchableOpacity>
+                        </View>
+                      </View>
+                    </View>
+                  </Modal>
+                ) : showDatePicker ? (
                   <DateTimePicker
                     value={data}
                     mode="date"
-                    display={Platform.OS === 'ios' ? 'spinner' : 'default'}
+                    display="default"
                     onChange={handleDateChange}
                   />
-                )}
+                ) : null}
               </View>
 
               <TouchableOpacity

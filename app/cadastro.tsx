@@ -3,16 +3,16 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
 import React, { useState } from 'react';
 import {
-    Alert,
-    KeyboardAvoidingView,
-    Platform,
-    SafeAreaView,
-    ScrollView,
-    StyleSheet,
-    Text,
-    TextInput,
-    TouchableOpacity,
-    View,
+  Alert,
+  KeyboardAvoidingView,
+  Platform,
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
 } from 'react-native';
 
 const styles = StyleSheet.create({
@@ -223,6 +223,7 @@ export default function CadastroScreen() {
                   onChangeText={setNome}
                   onFocus={() => setFocusedField('nome')}
                   onBlur={() => setFocusedField(null)}
+                  autoComplete="off"
                   editable={!loading}
                 />
               </View>
@@ -240,6 +241,7 @@ export default function CadastroScreen() {
                   onChangeText={setEmail}
                   onFocus={() => setFocusedField('email')}
                   onBlur={() => setFocusedField(null)}
+                  autoComplete="off"
                   keyboardType="email-address"
                   editable={!loading}
                 />
@@ -258,6 +260,8 @@ export default function CadastroScreen() {
                   onChangeText={setSenha}
                   onFocus={() => setFocusedField('senha')}
                   onBlur={() => setFocusedField(null)}
+                  textContentType="newPassword"
+                  autoComplete="password-new"
                   secureTextEntry
                   editable={!loading}
                 />
@@ -276,6 +280,8 @@ export default function CadastroScreen() {
                   onChangeText={setConfirmarSenha}
                   onFocus={() => setFocusedField('confirmarSenha')}
                   onBlur={() => setFocusedField(null)}
+                  textContentType="newPassword"
+                  autoComplete="password-new"
                   secureTextEntry
                   editable={!loading}
                 />
